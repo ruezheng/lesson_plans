@@ -151,12 +151,13 @@ VALUES (1, 1),
        (7, 4);
 ```
 
-For our first query, we are going to grab each item and its season using an `INNER JOIN`.
+⭐️ For our first query, we are going to grab each item and its season using an `INNER JOIN`.
 
 ```sql
 SELECT * FROM items
 INNER JOIN seasons
-ON items.season_id = seasons.id;
+ON items.season_id = seasons.id
+ORDER BY items.id;
 ```
 
 ```sql
@@ -192,10 +193,30 @@ grilled cheese       | spring
 (7 rows)
 ```
 
+```sql
+SELECT items.name AS item_name, 
+seasons.name AS season_name 
+FROM items
+INNER JOIN seasons
+ON items.season_id = seasons.id 
+ORDER BY items.id;
+```
+
+
 Now let's combine multiple `INNER JOIN`s to pull data from three tables `items`, `categories` and `item_categories`.
 
 * Write a query that pulls all the category names for `arugula salad`.
   Hint: Use multiple `INNER JOIN`s and a `WHERE` clause.
+
+```sql
+SELECT items.name AS item_name, 
+categories.name AS category_name 
+FROM items 
+INNER JOIN item_categories 
+ON items.id = item_categories.item_id 
+INNER JOIN categories 
+ON item_categories.category_id = categories.id;
+```
 
 Can you get your return value to look like this?
 
@@ -219,6 +240,11 @@ arugula salad | dinner
 arugula salad | lunch
 arugula salad | vegetarian
 (4 rows)
+```
+
+⭐️
+```sql
+SELECT items.name AS item_name, categories.name AS category_name FROM items INNER JOIN item_categories ON items.id = item_categories.item_id INNER JOIN categories ON item_categories.category_id = categories.id WHERE items.name = 'arugula salad';
 ```
 
 #### OUTER JOINS
