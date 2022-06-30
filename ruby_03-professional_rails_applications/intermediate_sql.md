@@ -64,7 +64,8 @@ VALUES ('lobster mac n cheese', 1200, 'side'),
 Let's create an item that has all NULL values:
 `INSERT into items (name, revenue, course) VALUES (NULL, NULL, NULL);`
 
-Typically you `count` records in a table by counting on the `id` column, like `SELECT COUNT(id) FROM items;`. However, it's not necessary for a table to have an `id` column. What else can you pass to `count` and still get `5` as your result? `SELECT count(*) FROM items`
+Typically you `count` records in a table by counting on the `id` column, like `SELECT COUNT(id) FROM items;`. However, it's not necessary for a table to have an `id` column. What else can you pass to `count` and still get `5` as your result? 
+`SELECT count(*) FROM items`
 
 #### Building on Aggregate Functions
 
@@ -72,7 +73,6 @@ Now, combine multiple functions by returning both the minimum and maximum value 
 `SELECT max(revenue), min(revenue) from items;`
 
 How can we get the revenue based on the course?
-
 `SELECT course, sum(revenue) FROM items GROUP BY course;`
 
 ##### Write queries for the following:
@@ -96,9 +96,9 @@ Show name, total revenue, and course:
 
 Now to the fun stuff. If you're a visual learner, you'll probably want to keep [this article](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/) as you explore the concepts below. We're going to need multiple tables and to ensure we are on the same page, let's drop our table and populate our database with new data to experiment with.
 
-`DROP TABLE items;`
+⭐️ `DROP TABLE items;`
 
-Create some tables...
+⭐️ Create some tables...
 
 ```sql
 CREATE TABLE seasons(id SERIAL, name TEXT);
@@ -107,7 +107,7 @@ CREATE TABLE categories(id SERIAL, name TEXT);
 CREATE TABLE item_categories(item_id INT, category_id INT);
 ```
 
-Insert some data...
+⭐️ Insert some data...
 
 ```sql
 INSERT INTO seasons (name)
