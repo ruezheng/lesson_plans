@@ -242,9 +242,18 @@ arugula salad | vegetarian
 (4 rows)
 ```
 
-⭐️
+⭐️⭐️⭐️
 ```sql
-SELECT items.name AS item_name, categories.name AS category_name FROM items INNER JOIN item_categories ON items.id = item_categories.item_id INNER JOIN categories ON item_categories.category_id = categories.id WHERE items.name = 'arugula salad';
+SELECT items.name 
+AS item_name, 
+categories.name 
+AS category_name 
+FROM items 
+INNER JOIN item_categories 
+ON items.id = item_categories.item_id 
+INNER JOIN categories 
+ON item_categories.category_id = categories.id 
+WHERE items.name = 'arugula salad';
 ```
 
 #### OUTER JOINS
@@ -260,6 +269,7 @@ VALUES ('italian beef', 600, NULL),
 
 Notice the result when we run an INNER JOIN on items and seasons.
 
+⭐️
 ```sql
 SELECT i.name items, s.name seasons
 FROM items i
@@ -267,7 +277,7 @@ INNER JOIN seasons s
 ON i.season_id = s.id;
 ```
 
-_Bonus: This query uses aliases for items (`i`) and seasons (`s`) to make it cleaner. Notice that it's not necessary to use `AS` to name the column headings._
+⭐️ _Bonus: This query uses aliases for items (`i`) and seasons (`s`) to make it cleaner. Notice that it's not necessary to use `AS` to name the column headings._
 
 ```sql
 items                | seasons
@@ -284,8 +294,9 @@ grilled cheese       | spring
 
 We don't see any of the new items that have `NULL` values for `season_id`.
 
-A `LEFT OUTER JOIN` will return _all_ records from the left table (items) and return matching records from the right table (seasons). Update the previous query and the return value and you should see something like this:
+⭐️ A `LEFT OUTER JOIN` will return _all_ records from the left table (items) and return matching records from the right table (seasons). Update the previous query and the return value and you should see something like this:
 
+⭐️
 ```sql
 SELECT *
 FROM items i
@@ -310,8 +321,29 @@ id  |         name        | revenue | season_id | id |  name
 ```
 
 What do you think a `RIGHT OUTER JOIN` will do?
+Return all records from the right table (seasons) and return matching records from the left table (items).
 
 * Write a query to test your guess.
+
+```sql
+intermediate_sql=# SELECT *
+FROM items i
+RIGHT OUTER JOIN seasons s
+ON i.season_id = s.id;
+```
+
+```sql
+ id |         name         | revenue | season_id | id |  name  
+----+----------------------+---------+-----------+----+--------
+  6 | hot dog              |    1000 |         1 |  1 | summer
+  2 | veggie lasagna       |    1000 |         1 |  1 | summer
+  3 | striped bass         |     500 |         1 |  1 | summer
+  4 | burger               |    2000 |         1 |  1 | summer
+  7 | arugula salad        |    1100 |         2 |  2 | autumn
+  1 | lobster mac n cheese |    1200 |         3 |  3 | winter
+  5 | grilled cheese       |     800 |         4 |  4 | spring
+```
+
 * Insert data into the right table that will not get returned on an `INNER JOIN`.
 
 ### Subqueries
