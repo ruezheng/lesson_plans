@@ -296,7 +296,6 @@ We don't see any of the new items that have `NULL` values for `season_id`.
 
 ⭐️ A `LEFT OUTER JOIN` will return _all_ records from the left table (items) and return matching records from the right table (seasons). Update the previous query and the return value and you should see something like this:
 
-⭐️
 ```sql
 SELECT *
 FROM items i
@@ -345,6 +344,8 @@ ON i.season_id = s.id;
 ```
 
 * Insert data into the right table that will not get returned on an `INNER JOIN`.
+
+
 
 ### Subqueries
 
