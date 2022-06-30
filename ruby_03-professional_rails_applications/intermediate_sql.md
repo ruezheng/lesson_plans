@@ -18,7 +18,7 @@ By the end of this lesson, you will know/be able to:
 
 #### Setup
 
-From your terminal, run `psql`.
+⭐️ From your terminal, run `psql`.
 
 If you get an error that says something like `Database username "YOUR_NAME" does not exist.` you will need to create a database that shares the username. Run `createdb "YOUR_NAME"` and re-run `psql`.
 
@@ -26,7 +26,7 @@ Create a database to use as a playground:
 `CREATE DATABASE intermediate_sql;`
 
 Close the current connection and connect to the DB we just created.
-`\c intermediate_sql;`
+⭐️ `\c intermediate_sql;`
 
 Create an items table:
 `CREATE TABLE items(id SERIAL, name TEXT, revenue INT, course TEXT);`
@@ -64,7 +64,7 @@ VALUES ('lobster mac n cheese', 1200, 'side'),
 Let's create an item that has all NULL values:
 `INSERT into items (name, revenue, course) VALUES (NULL, NULL, NULL);`
 
-Typically you `count` records in a table by counting on the `id` column, like `SELECT COUNT(id) FROM items;`. However, it's not necessary for a table to have an `id` column. What else can you pass to `count` and still get `5` as your result?
+Typically you `count` records in a table by counting on the `id` column, like `SELECT COUNT(id) FROM items;`. However, it's not necessary for a table to have an `id` column. What else can you pass to `count` and still get `5` as your result? `SELECT count(*) FROM items`
 
 #### Building on Aggregate Functions
 
@@ -78,9 +78,19 @@ How can we get the revenue based on the course?
 ##### Write queries for the following:
 
 1. Return all `main` courses. Hint: What ActiveRecord method would you use to get this?
+`SELECT * FROM items WHERE items.course = 'main';`
+
 1. Return only the names of the `main` courses.
+`SELECT name FROM items WHERE items.course = 'main';`
+
 1. Return the min and max value for the `main` courses.
+`SELECT max(revenue), min(revenue) FROM items WHERE course = 'main';`
+
 1. What's the total revenue for all `main` courses?
+`SELECT sum(revenue) FROM items WHERE course = 'main';`
+
+Show name, total revenue, and course:
+`SELECT items.name, sum(revenue), items.course FROM items WHERE course = 'main' GROUP BY items.name, items.course;`
 
 #### INNER JOINS
 
